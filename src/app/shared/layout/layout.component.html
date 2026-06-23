@@ -1,8 +1,16 @@
 <div class="layout-container d-flex">
     <app-sidebar class="no-print d-none d-md-block"></app-sidebar>
 
+    <!-- Mobile Sidebar Backdrop & Drawer -->
+    @if (isSidebarOpen()) {
+    <div class="mobile-sidebar-backdrop d-md-none" (click)="isSidebarOpen.set(false)"></div>
+    <div class="mobile-sidebar-drawer d-md-none shadow-lg">
+        <app-sidebar (click)="isSidebarOpen.set(false)"></app-sidebar>
+    </div>
+    }
+
     <div class="main-panel d-flex flex-column flex-grow-1">
-        <app-navbar class="no-print"></app-navbar>
+        <app-navbar class="no-print" (toggleSidebar)="toggleSidebar()"></app-navbar>
         <main class="content-wrapper flex-grow-1 p-4 overflow-auto">
             <router-outlet></router-outlet>
         </main>

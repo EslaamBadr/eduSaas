@@ -27,3 +27,65 @@
         background-color: white !important;
     }
 }
+
+/* Mobile Sidebar Drawer & Backdrop */
+.mobile-sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1060;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.mobile-sidebar-drawer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1070;
+    width: 260px;
+    height: 100vh;
+    left: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideInStart 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    app-sidebar {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+:host-context([dir="rtl"]) .mobile-sidebar-drawer {
+    left: auto;
+    right: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInStart {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+:host-context([dir="rtl"]) {
+    @keyframes slideInStart {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+}

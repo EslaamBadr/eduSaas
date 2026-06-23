@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,4 +18,10 @@ export class NavbarComponent {
   languageService = inject(LanguageService);
   themeService = inject(ThemeService);
   authService = inject(AuthService);
+
+  toggleSidebar = output<void>();
+
+  onToggleSidebar() {
+    this.toggleSidebar.emit();
+  }
 }

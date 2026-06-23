@@ -62,3 +62,13 @@
 .logout-btn:hover {
     background-color: rgba(239, 68, 68, 0.05) !important;
 }
+
+.text-indigo-btn {
+    color: var(--accent-color) !important;
+}
+
+@media (max-width: 576px) {
+    .system-title {
+        font-size: 1rem;
+    }
+}

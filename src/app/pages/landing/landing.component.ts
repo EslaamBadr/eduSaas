@@ -27,6 +27,20 @@ export class LandingPageComponent {
 
   isYearly = signal<boolean>(false);
   openFaq = signal<number | null>(null);
+  isMobileMenuOpen = signal<boolean>(false);
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen.set(!this.isMobileMenuOpen());
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen.set(false);
+  }
+
+  selectMobileSection(id: string) {
+    this.scrollToSection(id);
+    this.closeMobileMenu();
+  }
 
   scrollToSection(id: string) {
     const el = document.getElementById(id);

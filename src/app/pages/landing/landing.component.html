@@ -1,6 +1,5 @@
 <div class="landing-container">
-    <!-- Navbar -->
-    <nav
+    <!-- Navbar -->    <nav
         class="navbar-custom d-flex align-items-center justify-content-between px-3 px-md-5 py-3 glass-nav position-fixed w-100">
         <div class="d-flex align-items-center gap-2 logo-container" (click)="scrollToTop()">
             <div class="logo-box-mini d-inline-flex align-items-center justify-content-center">
@@ -30,21 +29,62 @@
 
             <!-- Language Switcher -->
             <button mat-stroked-button (click)="languageService.toggleLanguage()" class="lang-btn px-2 px-sm-3">
-                <mat-icon class="fs-6 me-1">language</mat-icon>
-                {{ languageService.currentLang() === 'ar' ? 'English' : 'العربية' }}
+                <mat-icon class="fs-6 me-sm-1">language</mat-icon>
+                <span class="d-none d-sm-inline">{{ languageService.currentLang() === 'ar' ? 'English' : 'العربية' }}</span>
+                <span class="d-inline d-sm-none">{{ languageService.currentLang() === 'ar' ? 'EN' : 'ع' }}</span>
             </button>
 
             <!-- Navigation Links to Login -->
             <button mat-button class="login-nav-btn d-none d-sm-inline-block" routerLink="/login">
                 {{ 'LANDING.NAV.LOGIN' | translate }}
             </button>
-            <button mat-flat-button class="signup-nav-btn btn-primary-custom px-3 py-2" routerLink="/register">
+            <button mat-flat-button class="signup-nav-btn btn-primary-custom d-none d-sm-inline-block px-3 py-2" routerLink="/register">
                 {{ 'LANDING.NAV.SIGNUP' | translate }}
             </button>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
+            <!-- Mobile Menu Toggle -->
+            <button mat-icon-button (click)="toggleMobileMenu()" class="theme-btn d-lg-none" aria-label="Toggle menu">
+                <mat-icon>{{ isMobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drawer (child of nav) -->
+        @if (isMobileMenuOpen()) {
+        <div class="mobile-drawer position-absolute w-100 start-0 glass-nav border-top">
+            <ul class="mobile-nav-links list-unstyled p-4 d-flex flex-column gap-3 mb-0">
+                <li>
+                    <a (click)="selectMobileSection('features')" class="nav-item-link cursor-pointer">
+                        {{ 'LANDING.NAV.FEATURES' | translate }}
+                    </a>
+                </li>
+                <li>
+                    <a (click)="selectMobileSection('testimonials')" class="nav-item-link cursor-pointer">
+                        {{ 'LANDING.NAV.TESTIMONIALS' | translate }}
+                    </a>
+                </li>
+                <li>
+                    <a (click)="selectMobileSection('pricing')" class="nav-item-link cursor-pointer">
+                        {{ 'LANDING.NAV.PRICING' | translate }}
+                    </a>
+                </li>
+                <li>
+                    <a (click)="selectMobileSection('faq')" class="nav-item-link cursor-pointer">
+                        {{ 'LANDING.NAV.FAQ' | translate }}
+                    </a>
+                </li>
+                <hr class="mobile-divider my-2">
+                <li class="d-flex flex-column gap-2">
+                    <button mat-button class="login-nav-btn w-100 text-center py-2" routerLink="/login" (click)="closeMobileMenu()">
+                        {{ 'LANDING.NAV.LOGIN' | translate }}
+                    </button>
+                    <button mat-flat-button class="signup-nav-btn btn-primary-custom w-100 py-2.5" routerLink="/register" (click)="closeMobileMenu()">
+                        {{ 'LANDING.NAV.SIGNUP' | translate }}
+                    </button>
+                </li>
+            </ul>
+        </div>
+        }
+    </nav>
     <header class="hero-section container py-5 mt-5">
         <div class="row align-items-center g-5 py-5">
             <div class="col-lg-6 hero-text-col fade-in-up">
