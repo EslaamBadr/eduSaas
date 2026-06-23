@@ -1,0 +1,68 @@
+.sidebar-custom {
+    width: 260px;
+    height: 100%;
+    background-color: var(--bg-sidebar);
+    color: #94a3b8;
+    border-right: 1px solid var(--border-color);
+    transition: width 0.3s;
+}
+
+.sidebar-brand {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.brand-icon {
+    color: #818cf8;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.brand-name {
+    color: #f8fafc;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.3px;
+}
+
+.nav-link-custom {
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.nav-link-custom:hover {
+    color: #f8fafc;
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.nav-link-custom.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.nav-link-custom mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.sidebar-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.version-text {
+    color: #475569;
+    font-size: 0.75rem;
+}
+
+/* Support for RTL */
+:host-context([dir="rtl"]) .sidebar-custom {
+    border-right: none;
+    border-left: 1px solid var(--border-color);
+}

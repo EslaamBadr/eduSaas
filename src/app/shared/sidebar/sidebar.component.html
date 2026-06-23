@@ -1,0 +1,36 @@
+<aside class="sidebar-custom d-flex flex-column justify-content-between">
+    <div>
+        <div class="sidebar-brand px-4 py-4 d-flex align-items-center gap-2">
+            <mat-icon class="brand-icon">security</mat-icon>
+            <span class="brand-name">HR Core Portal</span>
+        </div>
+
+        <ul class="nav flex-column px-2 gap-1 mt-3">
+            <li class="nav-item">
+                <a class="nav-link-custom d-flex align-items-center gap-3 px-3 py-2.5" routerLink="/employees"
+                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
+                    <mat-icon>people</mat-icon>
+                    <span>{{ 'SIDEBAR.EMPLOYEES' | translate }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link-custom d-flex align-items-center gap-3 px-3 py-2.5" routerLink="/leaves"
+                    routerLinkActive="active" matRipple>
+                    <mat-icon>event</mat-icon>
+                    <span>{{ 'SIDEBAR.LEAVES' | translate }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link-custom d-flex align-items-center gap-3 px-3 py-2.5" routerLink="/qualifications"
+                    routerLinkActive="active" matRipple>
+                    <mat-icon>card_giftcard</mat-icon>
+                    <span>{{ 'SIDEBAR.QUALIFICATIONS' | translate }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidebar-footer px-4 py-3 text-center">
+        <small class="version-text">v1.0.0 (Angular 21)</small>
+    </div>
+</aside>

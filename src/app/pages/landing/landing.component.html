@@ -1,0 +1,583 @@
+<div class="landing-container">
+    <!-- Navbar -->
+    <nav
+        class="navbar-custom d-flex align-items-center justify-content-between px-3 px-md-5 py-3 glass-nav position-fixed w-100">
+        <div class="d-flex align-items-center gap-2 logo-container" (click)="scrollToTop()">
+            <div class="logo-box-mini d-inline-flex align-items-center justify-content-center">
+                <mat-icon class="logo-icon-mini">school</mat-icon>
+            </div>
+            <span class="logo-text">EduSaaS</span>
+        </div>
+
+        <!-- Desktop Menu Links -->
+        <ul class="nav-links d-none d-lg-flex gap-4 list-unstyled mb-0">
+            <li><a (click)="scrollToSection('features')" class="nav-item-link cursor-pointer">{{ 'LANDING.NAV.FEATURES'
+                    | translate }}</a></li>
+            <li><a (click)="scrollToSection('testimonials')" class="nav-item-link cursor-pointer">{{
+                    'LANDING.NAV.TESTIMONIALS' | translate }}</a></li>
+            <li><a (click)="scrollToSection('pricing')" class="nav-item-link cursor-pointer">{{ 'LANDING.NAV.PRICING' |
+                    translate }}</a></li>
+            <li><a (click)="scrollToSection('faq')" class="nav-item-link cursor-pointer">{{ 'LANDING.NAV.FAQ' |
+                    translate }}</a></li>
+        </ul>
+
+        <!-- Action Controls -->
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
+            <!-- Theme Toggle -->
+            <button mat-icon-button (click)="themeService.toggleTheme()" class="theme-btn">
+                <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+            </button>
+
+            <!-- Language Switcher -->
+            <button mat-stroked-button (click)="languageService.toggleLanguage()" class="lang-btn px-2 px-sm-3">
+                <mat-icon class="fs-6 me-1">language</mat-icon>
+                {{ languageService.currentLang() === 'ar' ? 'English' : 'العربية' }}
+            </button>
+
+            <!-- Navigation Links to Login -->
+            <button mat-button class="login-nav-btn d-none d-sm-inline-block" routerLink="/login">
+                {{ 'LANDING.NAV.LOGIN' | translate }}
+            </button>
+            <button mat-flat-button class="signup-nav-btn btn-primary-custom px-3 py-2" routerLink="/login">
+                {{ 'LANDING.NAV.SIGNUP' | translate }}
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section container py-5 mt-5">
+        <div class="row align-items-center g-5 py-5">
+            <div class="col-lg-6 hero-text-col fade-in-up">
+                <span class="badge-custom mb-3 d-inline-flex align-items-center gap-2">
+                    <span class="pulse-dot"></span>
+                    {{ 'LANDING.HERO.BADGE' | translate }}
+                </span>
+                <h1 class="hero-title mb-3">
+                    {{ 'LANDING.HERO.TITLE' | translate }}
+                </h1>
+                <p class="hero-subtitle mb-4">
+                    {{ 'LANDING.HERO.SUBTITLE' | translate }}
+                </p>
+                <div class="d-flex flex-wrap gap-3 hero-actions">
+                    <button mat-flat-button class="btn-primary-custom py-3 px-4"
+                        (click)="scrollToSection('request-demo')">
+                        {{ 'LANDING.HERO.CTA_REQUEST' | translate }}
+                    </button>
+                    <button mat-stroked-button class="btn-secondary-custom py-3 px-4 gap-2" (click)="playPromoVideo()">
+                        <mat-icon>play_circle</mat-icon>
+                        {{ 'LANDING.HERO.CTA_VIDEO' | translate }}
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6 hero-visual-col fade-in-up">
+                <!-- Sleek Interactive Mock Dashboard UI -->
+                <div class="dashboard-mockup glass-panel p-3">
+                    <div
+                        class="mockup-header d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="dot-btn bg-danger"></span>
+                            <span class="dot-btn bg-warning"></span>
+                            <span class="dot-btn bg-success"></span>
+                            <span class="mock-search-bar ms-2 d-none d-sm-block"></span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="mock-notification"></span>
+                            <span class="mock-avatar"></span>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <!-- Sidebar mockup panel -->
+                        <div class="col-3 col-sm-2 d-flex flex-column gap-3 border-end pe-2">
+                            <span class="mock-sidebar-item active"></span>
+                            <span class="mock-sidebar-item"></span>
+                            <span class="mock-sidebar-item"></span>
+                            <span class="mock-sidebar-item"></span>
+                        </div>
+                        <!-- Main mockup panel -->
+                        <div class="col-9 col-sm-10 d-flex flex-column gap-3 ps-2">
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="mock-metric-card p-2 d-flex flex-column gap-1">
+                                        <span class="mock-metric-title">Pupils</span>
+                                        <span class="mock-metric-val">1,248</span>
+                                        <span class="mock-metric-indicator positive">+12%</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mock-metric-card p-2 d-flex flex-column gap-1">
+                                        <span class="mock-metric-title">Teachers</span>
+                                        <span class="mock-metric-val">84</span>
+                                        <span class="mock-metric-indicator neutral">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mini Chart -->
+                            <div class="mock-chart-container p-2 mt-1">
+                                <span class="mock-chart-title mb-2 d-block">Monthly Performance Analysis</span>
+                                <div class="mock-bars d-flex align-items-end justify-content-between px-2 pt-4">
+                                    <div class="mock-bar" style="height: 40%"></div>
+                                    <div class="mock-bar" style="height: 65%"></div>
+                                    <div class="mock-bar active" style="height: 85%"></div>
+                                    <div class="mock-bar" style="height: 50%"></div>
+                                    <div class="mock-bar" style="height: 70%"></div>
+                                    <div class="mock-bar" style="height: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Bar Section -->
+    <section class="stats-bar py-4">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-4">
+                    <div class="stat-item d-flex flex-column align-items-center">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">{{ 'LANDING.STATS.STUDENTS' | translate }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item d-flex flex-column align-items-center">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">{{ 'LANDING.STATS.UPTIME' | translate }}</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item d-flex flex-column align-items-center">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">{{ 'LANDING.STATS.SCHOOLS' | translate }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5 max-w-700 mx-auto">
+                <span class="section-label">{{ 'LANDING.FEATURES.LABEL' | translate }}</span>
+                <h2 class="section-title mt-2">{{ 'LANDING.FEATURES.TITLE' | translate }}</h2>
+                <p class="section-subtitle">{{ 'LANDING.FEATURES.SUBTITLE' | translate }}</p>
+            </div>
+            <div class="row g-4 mt-2">
+                <!-- SIS Feature -->
+                <div class="col-md-4">
+                    <div class="feature-card glass-panel p-4 h-100 text-center text-sm-start d-flex flex-column">
+                        <div class="feature-icon-wrapper mb-3 d-inline-flex align-items-center justify-content-center">
+                            <mat-icon class="feature-icon">badge</mat-icon>
+                        </div>
+                        <h3 class="feature-card-title mb-2">{{ 'LANDING.FEATURES.SIS_TITLE' | translate }}</h3>
+                        <p class="feature-card-text text-muted mb-0 flex-grow-1">{{ 'LANDING.FEATURES.SIS_DESC' |
+                            translate }}</p>
+                    </div>
+                </div>
+                <!-- Scheduler Feature -->
+                <div class="col-md-4">
+                    <div class="feature-card glass-panel p-4 h-100 text-center text-sm-start d-flex flex-column">
+                        <div class="feature-icon-wrapper mb-3 d-inline-flex align-items-center justify-content-center">
+                            <mat-icon class="feature-icon">schedule</mat-icon>
+                        </div>
+                        <h3 class="feature-card-title mb-2">{{ 'LANDING.FEATURES.SCHED_TITLE' | translate }}</h3>
+                        <p class="feature-card-text text-muted mb-0 flex-grow-1">{{ 'LANDING.FEATURES.SCHED_DESC' |
+                            translate }}</p>
+                    </div>
+                </div>
+                <!-- Communication Feature -->
+                <div class="col-md-4">
+                    <div class="feature-card glass-panel p-4 h-100 text-center text-sm-start d-flex flex-column">
+                        <div class="feature-icon-wrapper mb-3 d-inline-flex align-items-center justify-content-center">
+                            <mat-icon class="feature-icon">forum</mat-icon>
+                        </div>
+                        <h3 class="feature-card-title mb-2">{{ 'LANDING.FEATURES.COMM_TITLE' | translate }}</h3>
+                        <p class="feature-card-text text-muted mb-0 flex-grow-1">{{ 'LANDING.FEATURES.COMM_DESC' |
+                            translate }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section py-5 bg-light-soft">
+        <div class="container py-5">
+            <div class="text-center mb-5 max-w-700 mx-auto">
+                <span class="section-label">{{ 'LANDING.TESTIMONIALS.LABEL' | translate }}</span>
+                <h2 class="section-title mt-2">{{ 'LANDING.TESTIMONIALS.TITLE' | translate }}</h2>
+                <p class="section-subtitle">{{ 'LANDING.TESTIMONIALS.SUBTITLE' | translate }}</p>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-md-6">
+                    <div class="testimonial-card glass-panel p-4 d-flex flex-column justify-content-between h-100">
+                        <p class="testimonial-text mb-4 font-italic">
+                            "{{ 'LANDING.TESTIMONIALS.QUOTE_1' | translate }}"
+                        </p>
+                        <div class="d-flex align-items-center gap-3 mt-auto">
+                            <div
+                                class="testimonial-avatar d-flex align-items-center justify-content-center bg-indigo-sub text-indigo">
+                                <mat-icon>school</mat-icon>
+                            </div>
+                            <div>
+                                <h5 class="testimonial-author mb-0">{{ 'LANDING.TESTIMONIALS.AUTHOR_1' | translate }}
+                                </h5>
+                                <small class="testimonial-role text-muted">{{ 'LANDING.TESTIMONIALS.ROLE_1' | translate
+                                    }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="testimonial-card glass-panel p-4 d-flex flex-column justify-content-between h-100">
+                        <p class="testimonial-text mb-4 font-italic">
+                            "{{ 'LANDING.TESTIMONIALS.QUOTE_2' | translate }}"
+                        </p>
+                        <div class="d-flex align-items-center gap-3 mt-auto">
+                            <div
+                                class="testimonial-avatar d-flex align-items-center justify-content-center bg-indigo-sub text-indigo">
+                                <mat-icon>admin_panel_settings</mat-icon>
+                            </div>
+                            <div>
+                                <h5 class="testimonial-author mb-0">{{ 'LANDING.TESTIMONIALS.AUTHOR_2' | translate }}
+                                </h5>
+                                <small class="testimonial-role text-muted">{{ 'LANDING.TESTIMONIALS.ROLE_2' | translate
+                                    }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section py-5">
+        <div class="container py-5">
+            <div class="text-center mb-4 max-w-700 mx-auto">
+                <span class="section-label">{{ 'LANDING.PRICING.LABEL' | translate }}</span>
+                <h2 class="section-title mt-2">{{ 'LANDING.PRICING.TITLE' | translate }}</h2>
+                <p class="section-subtitle">{{ 'LANDING.PRICING.SUBTITLE' | translate }}</p>
+
+                <!-- Pricing Toggle -->
+                <div
+                    class="pricing-toggle-wrapper d-inline-flex align-items-center gap-3 p-1.5 mt-4 rounded-pill border">
+                    <button class="toggle-btn px-3 py-1.5 rounded-pill" [class.active]="!isYearly()"
+                        (click)="isYearly.set(false)">
+                        Monthly
+                    </button>
+                    <button class="toggle-btn px-3 py-1.5 rounded-pill d-flex align-items-center gap-1.5"
+                        [class.active]="isYearly()" (click)="isYearly.set(true)">
+                        Yearly <span class="badge bg-indigo-sub text-indigo rounded-pill fs-7">-20%</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-3 align-items-stretch">
+                <!-- Basic Plan -->
+                <div class="col-lg-4">
+                    <div
+                        class="pricing-card glass-panel p-4 h-100 d-flex flex-column justify-content-between border-accent-none">
+                        <div>
+                            <h4 class="plan-name mb-1">{{ 'LANDING.PRICING.BASIC_TITLE' | translate }}</h4>
+                            <p class="plan-desc text-muted mb-4 fs-7">{{ 'LANDING.PRICING.BASIC_DESC' | translate }}</p>
+                            <div class="price-container d-flex align-items-baseline mb-4">
+                                <span class="price-val fs-1 fw-bold">{{ getPrice(99) }}</span>
+                                <span class="price-period text-muted ms-1">{{ isYearly() ? '/year' :
+                                    ('LANDING.PRICING.BASIC_PERIOD' | translate) }}</span>
+                            </div>
+                            <hr class="my-4">
+                            <ul class="plan-features list-unstyled d-flex flex-column gap-3 mb-0">
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.BASIC_FEAT_1' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.BASIC_FEAT_2' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.BASIC_FEAT_3' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.BASIC_FEAT_4' | translate }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button mat-stroked-button class="btn-pricing-secondary w-100 py-2.5 mt-5" routerLink="/login">
+                            {{ 'LANDING.PRICING.BASIC_CTA' | translate }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="col-lg-4">
+                    <div
+                        class="pricing-card glass-panel p-4 h-100 d-flex flex-column justify-content-between popular-card position-relative border-accent">
+                        <div
+                            class="popular-badge position-absolute px-3 py-1 rounded-pill text-white font-weight-semibold">
+                            {{ 'LANDING.PRICING.POPULAR' | translate }}
+                        </div>
+                        <div>
+                            <h4 class="plan-name mb-1">{{ 'LANDING.PRICING.PROF_TITLE' | translate }}</h4>
+                            <p class="plan-desc text-muted mb-4 fs-7">{{ 'LANDING.PRICING.PROF_DESC' | translate }}</p>
+                            <div class="price-container d-flex align-items-baseline mb-4">
+                                <span class="price-val fs-1 fw-bold">{{ getPrice(249) }}</span>
+                                <span class="price-period text-muted ms-1">{{ isYearly() ? '/year' :
+                                    ('LANDING.PRICING.PROF_PERIOD' | translate) }}</span>
+                            </div>
+                            <hr class="my-4">
+                            <ul class="plan-features list-unstyled d-flex flex-column gap-3 mb-0">
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.PROF_FEAT_1' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.PROF_FEAT_2' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.PROF_FEAT_3' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.PROF_FEAT_4' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.PROF_FEAT_5' | translate }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button mat-flat-button class="btn-primary-custom w-100 py-2.5 mt-5" routerLink="/login">
+                            {{ 'LANDING.PRICING.PROF_CTA' | translate }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="col-lg-4">
+                    <div
+                        class="pricing-card glass-panel p-4 h-100 d-flex flex-column justify-content-between border-accent-none">
+                        <div>
+                            <h4 class="plan-name mb-1">{{ 'LANDING.PRICING.ENT_TITLE' | translate }}</h4>
+                            <p class="plan-desc text-muted mb-4 fs-7">{{ 'LANDING.PRICING.ENT_DESC' | translate }}</p>
+                            <div class="price-container d-flex align-items-baseline mb-4">
+                                <span class="price-val fs-1 fw-bold">{{ 'LANDING.PRICING.ENT_PRICE' | translate
+                                    }}</span>
+                                <span class="price-period text-muted ms-1"></span>
+                            </div>
+                            <hr class="my-4">
+                            <ul class="plan-features list-unstyled d-flex flex-column gap-3 mb-0">
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.ENT_FEAT_1' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.ENT_FEAT_2' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.ENT_FEAT_3' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.ENT_FEAT_4' | translate }}</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2">
+                                    <mat-icon class="feature-check text-success">check_circle</mat-icon>
+                                    <span>{{ 'LANDING.PRICING.ENT_FEAT_5' | translate }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button mat-stroked-button class="btn-pricing-secondary w-100 py-2.5 mt-5"
+                            (click)="contactSales()">
+                            {{ 'LANDING.PRICING.ENT_CTA' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section py-5 bg-light-soft">
+        <div class="container py-5">
+            <div class="text-center mb-5 max-w-700 mx-auto">
+                <span class="section-label">{{ 'LANDING.FAQ.LABEL' | translate }}</span>
+                <h2 class="section-title mt-2">{{ 'LANDING.FAQ.TITLE' | translate }}</h2>
+                <p class="section-subtitle">{{ 'LANDING.FAQ.SUBTITLE' | translate }}</p>
+            </div>
+
+            <div class="faq-accordion max-w-800 mx-auto d-flex flex-column gap-3">
+                <!-- Q1 -->
+                <div class="accordion-item-custom glass-panel overflow-hidden" [class.open]="openFaq() === 1">
+                    <button
+                        class="accordion-header-btn w-100 px-4 py-3 d-flex align-items-center justify-content-between border-0 text-start"
+                        (click)="toggleFaq(1)">
+                        <span class="faq-question fw-semibold">{{ 'LANDING.FAQ.Q1' | translate }}</span>
+                        <mat-icon class="faq-arrow-icon">expand_more</mat-icon>
+                    </button>
+                    <div class="accordion-body-custom px-4">
+                        <p class="faq-answer pb-3 mb-0 text-muted">{{ 'LANDING.FAQ.A1' | translate }}</p>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="accordion-item-custom glass-panel overflow-hidden" [class.open]="openFaq() === 2">
+                    <button
+                        class="accordion-header-btn w-100 px-4 py-3 d-flex align-items-center justify-content-between border-0 text-start"
+                        (click)="toggleFaq(2)">
+                        <span class="faq-question fw-semibold">{{ 'LANDING.FAQ.Q2' | translate }}</span>
+                        <mat-icon class="faq-arrow-icon">expand_more</mat-icon>
+                    </button>
+                    <div class="accordion-body-custom px-4">
+                        <p class="faq-answer pb-3 mb-0 text-muted">{{ 'LANDING.FAQ.A2' | translate }}</p>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="accordion-item-custom glass-panel overflow-hidden" [class.open]="openFaq() === 3">
+                    <button
+                        class="accordion-header-btn w-100 px-4 py-3 d-flex align-items-center justify-content-between border-0 text-start"
+                        (click)="toggleFaq(3)">
+                        <span class="faq-question fw-semibold">{{ 'LANDING.FAQ.Q3' | translate }}</span>
+                        <mat-icon class="faq-arrow-icon">expand_more</mat-icon>
+                    </button>
+                    <div class="accordion-body-custom px-4">
+                        <p class="faq-answer pb-3 mb-0 text-muted">{{ 'LANDING.FAQ.A3' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personalized Demo Section -->
+    <section id="request-demo" class="demo-section py-5">
+        <div class="container">
+            <div class="demo-header">
+                <h2>{{ 'LANDING.DEMO.TITLE' | translate }}</h2>
+                <p>{{ 'LANDING.DEMO.SUBTITLE' | translate }}</p>
+            </div>
+
+            <div class="demo-form">
+                <form class="mx-auto">
+                    <div class="form-group">
+                        <label>{{ 'LANDING.DEMO.NAME' | translate }}</label>
+                        <input type="text" placeholder="Julian Smith" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ 'LANDING.DEMO.EMAIL' | translate }}</label>
+                        <input type="email" placeholder="julian@university.edu" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ 'LANDING.DEMO.PHONE' | translate }}</label>
+                        <input type="text" placeholder="+1 (555) 000-0000" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ 'LANDING.DEMO.INSTITUTION_TYPE' | translate }}</label>
+
+                        <select>
+                            <option>{{ 'LANDING.DEMO.HIGHER_EDUCATION' | translate }}</option>
+                            <option>{{ 'LANDING.DEMO.K12' | translate }}</option>
+                            <option>{{ 'LANDING.DEMO.UNIVERSITY' | translate }}</option>
+                            <option>{{ 'LANDING.DEMO.TRAINING' | translate }}</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        {{ 'LANDING.DEMO.SUBMIT' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner Section -->
+    <section class="cta-banner-section py-5 text-center text-white">
+        <div class="container py-5 glass-cta">
+            <h2 class="cta-title mb-4 fw-bold">{{ 'LANDING.CTA_BANNER.TITLE' | translate }}</h2>
+            <!-- <p class="cta-subtitle mb-4 text-white-50 max-w-600 mx-auto">{{ 'LANDING.CTA_BANNER.SUBTITLE' | translate }}</p> -->
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <button mat-flat-button class="btn-cta-primary px-4 py-3" routerLink="/login">
+                    {{ 'LANDING.CTA_BANNER.CTA_START' | translate }}
+                </button>
+                <button mat-stroked-button class="btn-cta-secondary px-4 py-3" (click)="contactSales()">
+                    {{ 'LANDING.CTA_BANNER.CTA_CONTACT' | translate }}
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer-section pt-5 pb-4 border-top">
+        <div class="container">
+            <div class="row g-4 pb-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="logo-box-mini d-inline-flex align-items-center justify-content-center">
+                            <mat-icon class="logo-icon-mini">school</mat-icon>
+                        </div>
+                        <span class="logo-text">EduSaaS</span>
+                    </div>
+                    <p class="footer-desc text-muted mb-4">
+                        {{ 'LANDING.FOOTER.DESC' | translate }}
+                    </p>
+                    <!-- Social links mockup -->
+                    <div class="d-flex gap-3 text-muted">
+                        <mat-icon class="social-icon">facebook</mat-icon>
+                        <mat-icon class="social-icon">school</mat-icon>
+                        <mat-icon class="social-icon">public</mat-icon>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 col-md-3 offset-lg-2">
+                    <h5 class="footer-header mb-3">{{ 'LANDING.FOOTER.PROD_TITLE' | translate }}</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2 text-muted fs-7">
+                        <li>{{ 'LANDING.NAV.FEATURES' | translate }}</li>
+                        <li>{{ 'LANDING.NAV.PRICING' | translate }}</li>
+                        <li>Integrations</li>
+                        <li>Updates</li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 col-md-3">
+                    <h5 class="footer-header mb-3">{{ 'LANDING.FOOTER.COMP_TITLE' | translate }}</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2 text-muted fs-7">
+                        <li>About us</li>
+                        <li>Careers</li>
+                        <li>Press</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 col-md-3">
+                    <h5 class="footer-header mb-3">{{ 'LANDING.FOOTER.SUPP_TITLE' | translate }}</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2 text-muted fs-7">
+                        <li>Documentation</li>
+                        <li>Guides</li>
+                        <li>API Status</li>
+                        <li>FAQ</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 pt-3">
+                <span class="copyright-text text-muted fs-7">{{ 'LANDING.FOOTER.COPYRIGHT' | translate }}</span>
+                <div class="footer-policies d-flex gap-4 text-muted fs-7">
+                    <span class="cursor-pointer">{{ 'LANDING.FOOTER.PRIVACY' | translate }}</span>
+                    <span class="cursor-pointer">{{ 'LANDING.FOOTER.TERMS' | translate }}</span>
+                    <span class="cursor-pointer">{{ 'LANDING.FOOTER.COOKIES' | translate }}</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,64 @@
+.navbar-custom {
+    height: 70px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.3s;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.system-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.text-indigo {
+    color: var(--accent-color);
+}
+
+.lang-btn {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    font-family: inherit;
+    border-radius: 8px !important;
+    font-weight: 500;
+}
+
+.theme-toggle-btn {
+    color: var(--text-secondary) !important;
+}
+
+.user-badge {
+    background-color: var(--bg-primary);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.user-icon {
+    color: var(--accent-color);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+.logout-btn {
+    color: var(--danger-color) !important;
+    border-color: rgba(239, 68, 68, 0.2) !important;
+    border-radius: 8px !important;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background-color: rgba(239, 68, 68, 0.05) !important;
+}

@@ -1,0 +1,168 @@
+<div class="auth-page">
+
+  <!-- Top Bar -->
+  <div class="auth-topbar">
+    <a routerLink="/" class="back-home-btn">
+      <mat-icon>arrow_back</mat-icon>
+      <span>{{ 'REGISTER.BACK_TO_HOME' | translate }}</span>
+    </a>
+    <div class="topbar-actions">
+      <button class="icon-action-btn" (click)="themeService.toggleTheme()" id="register-theme-toggle">
+        <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+      <button class="lang-action-btn" (click)="languageService.toggleLanguage()" id="register-lang-toggle">
+        <mat-icon>language</mat-icon>
+        <span>{{ languageService.currentLang() === 'ar' ? 'EN' : 'ع' }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Auth Card -->
+  <div class="auth-center">
+    <div class="auth-card glass-card fade-in-up">
+
+      <!-- Logo -->
+      <div class="card-brand">
+        <div class="brand-logo-icon">
+          <mat-icon>school</mat-icon>
+        </div>
+        <span class="brand-name">EduSaaS</span>
+      </div>
+
+      @if (!success()) {
+
+        <!-- Form Header -->
+        <div class="form-header">
+          <h1 class="form-title">{{ 'REGISTER.TITLE' | translate }}</h1>
+          <p class="form-subtitle">{{ 'REGISTER.SUBTITLE' | translate }}</p>
+        </div>
+
+        <!-- Register Form -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form" id="register-form">
+
+          <!-- Full Name -->
+          <div class="field-group">
+            <label class="field-label" for="reg-name">{{ 'REGISTER.FULL_NAME' | translate }}</label>
+            <div class="field-input-wrap">
+              <mat-icon class="field-icon">badge</mat-icon>
+              <input id="reg-name" type="text" formControlName="fullName" class="field-input"
+                [placeholder]="'REGISTER.FULL_NAME' | translate" autocomplete="name">
+            </div>
+            @if (registerForm.get('fullName')?.touched && registerForm.get('fullName')?.hasError('required')) {
+              <div class="field-error">{{ 'REGISTER.REQUIRED_NAME' | translate }}</div>
+            }
+          </div>
+
+          <!-- Email -->
+          <div class="field-group">
+            <label class="field-label" for="reg-email">{{ 'REGISTER.EMAIL' | translate }}</label>
+            <div class="field-input-wrap">
+              <mat-icon class="field-icon">email</mat-icon>
+              <input id="reg-email" type="email" formControlName="email" class="field-input"
+                [placeholder]="'REGISTER.EMAIL' | translate" autocomplete="email">
+            </div>
+            @if (registerForm.get('email')?.touched) {
+              @if (registerForm.get('email')?.hasError('required')) {
+                <div class="field-error">{{ 'REGISTER.REQUIRED_EMAIL' | translate }}</div>
+              } @else if (registerForm.get('email')?.hasError('email')) {
+                <div class="field-error">{{ 'REGISTER.INVALID_EMAIL' | translate }}</div>
+              }
+            }
+          </div>
+
+          <!-- Role -->
+          <div class="field-group">
+            <label class="field-label">{{ 'REGISTER.ROLE' | translate }}</label>
+            <div class="role-tabs">
+              @for (role of roles; track role.value) {
+                <button
+                  type="button"
+                  class="role-tab"
+                  [class.active]="registerForm.get('role')?.value === role.value"
+                  (click)="registerForm.get('role')?.setValue(role.value)"
+                  [id]="'reg-role-' + role.value">
+                  <mat-icon class="role-icon">{{ role.icon }}</mat-icon>
+                  <span>{{ role.labelKey | translate }}</span>
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="field-group">
+            <label class="field-label" for="reg-password">{{ 'REGISTER.PASSWORD' | translate }}</label>
+            <div class="field-input-wrap">
+              <mat-icon class="field-icon">lock_outline</mat-icon>
+              <input id="reg-password" [type]="showPassword() ? 'text' : 'password'"
+                formControlName="password" class="field-input"
+                [placeholder]="'REGISTER.PASSWORD' | translate" autocomplete="new-password">
+              <button type="button" class="toggle-password-btn" (click)="togglePassword()" id="reg-toggle-password">
+                <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </div>
+            @if (registerForm.get('password')?.touched) {
+              @if (registerForm.get('password')?.hasError('required')) {
+                <div class="field-error">{{ 'REGISTER.REQUIRED_PASSWORD' | translate }}</div>
+              } @else if (registerForm.get('password')?.hasError('minlength')) {
+                <div class="field-error">{{ 'REGISTER.PASSWORD_MIN' | translate }}</div>
+              }
+            }
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="field-group">
+            <label class="field-label" for="reg-confirm">{{ 'REGISTER.CONFIRM_PASSWORD' | translate }}</label>
+            <div class="field-input-wrap">
+              <mat-icon class="field-icon">lock_reset</mat-icon>
+              <input id="reg-confirm" [type]="showConfirm() ? 'text' : 'password'"
+                formControlName="confirmPassword" class="field-input"
+                [placeholder]="'REGISTER.CONFIRM_PASSWORD' | translate" autocomplete="new-password">
+              <button type="button" class="toggle-password-btn" (click)="toggleConfirm()" id="reg-toggle-confirm">
+                <mat-icon>{{ showConfirm() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </div>
+            @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('mismatch')) {
+              <div class="field-error">{{ 'REGISTER.PASSWORD_MISMATCH' | translate }}</div>
+            }
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="submit-btn" id="register-submit-btn"
+            [disabled]="registerForm.invalid || loading()">
+            @if (loading()) {
+              <span class="btn-spinner"></span>
+            } @else {
+              <mat-icon>person_add</mat-icon>
+            }
+            {{ 'REGISTER.SUBMIT' | translate }}
+          </button>
+
+        </form>
+
+        <!-- Sign In Link -->
+        <div class="auth-alt-link">
+          <span>{{ 'REGISTER.HAVE_ACCOUNT' | translate }}</span>
+          <a routerLink="/login" id="go-to-login-link">{{ 'REGISTER.SIGN_IN' | translate }}</a>
+        </div>
+
+      } @else {
+
+        <!-- Success State -->
+        <div class="success-state">
+          <div class="success-icon-wrap">
+            <mat-icon class="success-icon">check_circle</mat-icon>
+          </div>
+          <h2 class="success-title">{{ 'REGISTER.SUCCESS_TITLE' | translate }}</h2>
+          <p class="success-msg">{{ 'REGISTER.SUCCESS_MSG' | translate }}</p>
+          <div class="success-redirect">
+            <span class="btn-spinner dark"></span>
+            <span>Redirecting to Sign In...</span>
+          </div>
+        </div>
+
+      }
+
+    </div>
+  </div>
+
+</div>

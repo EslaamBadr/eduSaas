@@ -1,0 +1,139 @@
+<div class="auth-page">
+
+  <!-- Top Bar -->
+  <div class="auth-topbar">
+    <a routerLink="/" class="back-home-btn">
+      <mat-icon>arrow_back</mat-icon>
+      <span>{{ 'LOGIN.BACK_TO_HOME' | translate }}</span>
+    </a>
+    <div class="topbar-actions">
+      <button class="icon-action-btn" (click)="themeService.toggleTheme()" id="login-theme-toggle">
+        <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+      <button class="lang-action-btn" (click)="languageService.toggleLanguage()" id="login-lang-toggle">
+        <mat-icon>language</mat-icon>
+        <span>{{ languageService.currentLang() === 'ar' ? 'EN' : 'ع' }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Auth Card -->
+  <div class="auth-center">
+    <div class="auth-card glass-card fade-in-up">
+
+      <!-- Logo -->
+      <div class="card-brand">
+        <div class="brand-logo-icon">
+          <mat-icon>school</mat-icon>
+        </div>
+        <span class="brand-name">EduSaaS</span>
+      </div>
+
+      <!-- Form Header -->
+      <div class="form-header">
+        <h1 class="form-title">{{ 'LOGIN.TITLE' | translate }}</h1>
+        <p class="form-subtitle">{{ 'LOGIN.SUBTITLE' | translate }}</p>
+      </div>
+
+      <!-- Role Selector -->
+      <div class="role-selector">
+        <span class="role-label-text">{{ 'LOGIN.ROLE_LABEL' | translate }}</span>
+        <div class="role-tabs">
+          @for (role of roles; track role.key) {
+            <button
+              type="button"
+              class="role-tab"
+              [class.active]="selectedRole() === role.key"
+              (click)="selectRole(role.key)"
+              [id]="'role-tab-' + role.key">
+              <mat-icon class="role-icon">{{ role.icon }}</mat-icon>
+              <span>{{ role.labelKey | translate }}</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Error Alert -->
+      @if (errorMessage()) {
+        <div class="error-alert">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ errorMessage()! | translate }}</span>
+        </div>
+      }
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form" id="login-form">
+
+        <!-- Username -->
+        <div class="field-group">
+          <label class="field-label" for="login-username">{{ 'LOGIN.USERNAME' | translate }}</label>
+          <div class="field-input-wrap">
+            <mat-icon class="field-icon">person_outline</mat-icon>
+            <input
+              id="login-username"
+              type="text"
+              formControlName="username"
+              class="field-input"
+              [placeholder]="'LOGIN.USERNAME' | translate"
+              autocomplete="username">
+          </div>
+          @if (loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')) {
+            <div class="field-error">{{ 'LOGIN.REQUIRED_USERNAME' | translate }}</div>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="field-group">
+          <div class="field-label-row">
+            <label class="field-label" for="login-password">{{ 'LOGIN.PASSWORD' | translate }}</label>
+            <a routerLink="/forgot-password" class="forgot-link" id="forgot-password-link">
+              {{ 'LOGIN.FORGOT_PASSWORD' | translate }}
+            </a>
+          </div>
+          <div class="field-input-wrap">
+            <mat-icon class="field-icon">lock_outline</mat-icon>
+            <input
+              id="login-password"
+              [type]="showPassword() ? 'text' : 'password'"
+              formControlName="password"
+              class="field-input"
+              [placeholder]="'LOGIN.PASSWORD' | translate"
+              autocomplete="current-password">
+            <button type="button" class="toggle-password-btn" (click)="togglePassword()" id="login-toggle-password">
+              <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+          @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
+            <div class="field-error">{{ 'LOGIN.REQUIRED_PASSWORD' | translate }}</div>
+          }
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn" id="login-submit-btn"
+          [disabled]="loginForm.invalid || loading()">
+          @if (loading()) {
+            <span class="btn-spinner"></span>
+          } @else {
+            <mat-icon>login</mat-icon>
+          }
+          {{ 'LOGIN.SUBMIT' | translate }}
+        </button>
+
+      </form>
+
+      <!-- Demo Hint -->
+      <div class="demo-hint">
+        <mat-icon>info_outline</mat-icon>
+        <span>{{ 'LOGIN.ADMIN_MOCK' | translate }}</span>
+      </div>
+
+      <!-- Register Link -->
+      <div class="auth-alt-link">
+        <span>{{ 'LOGIN.NO_ACCOUNT' | translate }}</span>
+        <a routerLink="/register" id="go-to-register-link">{{ 'LOGIN.CREATE_ACCOUNT' | translate }}</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>

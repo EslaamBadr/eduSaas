@@ -1,0 +1,330 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'ngx-toastr/toastr';
+
+/* Fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+:root {
+  --font-en: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-ar: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Cairo, sans-serif;
+  --font-family: var(--font-en);
+
+  /* Light Theme Variables */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-sidebar: #0f172a;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --accent-color: #4f46e5;
+  --accent-hover: #4338ca;
+  --danger-color: #ef4444;
+  --success-color: #22c55e;
+  --warning-color: #f59e0b;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-blur: 12px;
+  --card-border-radius: 16px;
+}
+
+body.dark-theme {
+  /* Dark Theme Variables */
+  --bg-primary: #090d16;
+  --bg-secondary: #121824;
+  --bg-sidebar: #0b0f19;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border-color: #1e293b;
+  --accent-color: #6366f1;
+  --accent-hover: #4f46e5;
+  --glass-bg: rgba(18, 24, 36, 0.7);
+  --glass-border: rgba(30, 41, 59, 0.5);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+}
+
+/* RTL Specific adjustments */
+[dir="rtl"] {
+  --font-family: var(--font-ar);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Material component overrides to match design system */
+.mat-mdc-card {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--card-border-radius) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+}
+
+.mat-mdc-table {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.mat-mdc-header-cell {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.mat-mdc-cell {
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.mat-mdc-paginator {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-secondary) !important;
+  border-top: 1px solid var(--border-color) !important;
+}
+
+/* Paginator dark mode – make all inner text and icons visible */
+.mat-mdc-paginator .mat-mdc-select-value,
+.mat-mdc-paginator .mat-mdc-select-value-text,
+.mat-mdc-paginator .mat-mdc-select-arrow,
+.mat-mdc-paginator .mat-mdc-paginator-range-label,
+.mat-mdc-paginator .mat-mdc-paginator-page-size-label {
+  color: var(--text-secondary) !important;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button .mat-icon,
+.mat-mdc-paginator .mat-mdc-icon-button mat-icon {
+  color: var(--text-secondary) !important;
+}
+
+.mat-mdc-paginator .mat-mdc-icon-button[disabled] .mat-icon,
+.mat-mdc-paginator .mat-mdc-icon-button[disabled] mat-icon {
+  color: var(--text-muted) !important;
+  opacity: 0.5;
+}
+
+/* Mirror navigation arrow icons in RTL so they point the right direction */
+[dir="rtl"] .mat-mdc-paginator .mat-mdc-icon-button .mat-icon,
+[dir="rtl"] .mat-mdc-paginator .mat-mdc-icon-button mat-icon {
+  transform: scaleX(-1);
+}
+
+/* Sort header arrows visible in dark mode */
+.mat-sort-header-arrow {
+  color: var(--text-secondary) !important;
+}
+
+/* Input group text (icon wrapper) background and border */
+.input-group-text {
+  background-color: var(--bg-primary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Placeholder colors for custom inputs */
+.form-control-custom::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1;
+}
+
+/* Fix input-group border joining – works for both LTR and RTL using logical properties */
+.input-group>.input-group-text:first-child {
+  border-start-start-radius: 8px !important;
+  border-end-start-radius: 8px !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  border-inline-end: none !important;
+}
+
+.input-group>.form-control-custom {
+  border-start-start-radius: 0 !important;
+  border-end-start-radius: 0 !important;
+  border-start-end-radius: 8px !important;
+  border-end-end-radius: 8px !important;
+  border-inline-start: none !important;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Form label visibility in dark mode */
+.form-label {
+  color: var(--text-secondary) !important;
+}
+
+/* Paginator select panel background */
+.mat-mdc-select-panel {
+  background-color: var(--bg-secondary) !important;
+}
+
+.mat-mdc-option {
+  color: var(--text-primary) !important;
+}
+
+.mat-mdc-option:hover,
+.mat-mdc-option.mat-mdc-option-active {
+  background-color: var(--bg-primary) !important;
+}
+
+/* Custom button styles */
+.btn-primary-custom {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)) !important;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.btn-primary-custom,
+.btn-primary-custom * {
+  color: #ffffff !important;
+}
+
+.btn-primary-custom:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+}
+
+/* Custom form inputs styling */
+.form-control-custom {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control-custom:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Page animations */
+.fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Print optimizations */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .mat-mdc-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Generates A4 printable page */
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+}
+
+/* Dark mode: invert the native date picker icon so it's visible */
+body.dark-theme {
+  --date-icon-filter: invert(0.7);
+}
+
+/* ============================================================
+   Global landing navbar dark-mode overrides
+   (kept here to bypass Angular component view-encapsulation)
+   ============================================================ */
+body.dark-theme .glass-nav {
+  background: rgba(9, 13, 22, 0.96) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.8) !important;
+}
+
+body.dark-theme .glass-nav .logo-text {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .glass-nav .nav-item-link {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .glass-nav .nav-item-link:hover {
+  color: #6366f1 !important;
+}
+
+body.dark-theme .glass-nav .login-nav-btn {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .glass-nav .theme-btn {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .glass-nav .lang-btn {
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
