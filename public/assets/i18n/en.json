@@ -9,7 +9,6 @@
     "REQUIRED_USERNAME": "Username is required.",
     "REQUIRED_PASSWORD": "Password is required.",
     "INVALID_CREDENTIALS": "Invalid username or password.",
-    "ADMIN_MOCK": "Demo: username admin | password admin",
     "FORGOT_PASSWORD": "Forgot password?",
     "NO_ACCOUNT": "Don't have an account?",
     "CREATE_ACCOUNT": "Create Account",

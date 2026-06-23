@@ -9,7 +9,6 @@
     "REQUIRED_USERNAME": "اسم المستخدم مطلوب.",
     "REQUIRED_PASSWORD": "كلمة المرور مطلوبة.",
     "INVALID_CREDENTIALS": "اسم المستخدم أو كلمة المرور غير صالحة.",
-    "ADMIN_MOCK": "تجريبي: اسم المستخدم admin | كلمة المرور admin",
     "FORGOT_PASSWORD": "نسيت كلمة المرور؟",
     "NO_ACCOUNT": "ليس لديك حساب؟",
     "CREATE_ACCOUNT": "إنشاء حساب",

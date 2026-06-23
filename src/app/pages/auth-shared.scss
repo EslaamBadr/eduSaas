@@ -23,12 +23,10 @@
     content: '';
     position: fixed;
     inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(9, 13, 34, 0.82) 0%,
-      rgba(30, 14, 80, 0.75) 50%,
-      rgba(7, 20, 50, 0.82) 100%
-    );
+    background: linear-gradient(135deg,
+        rgba(9, 13, 34, 0.82) 0%,
+        rgba(30, 14, 80, 0.75) 50%,
+        rgba(7, 20, 50, 0.82) 100%);
     z-index: 0;
   }
 }
@@ -76,13 +74,21 @@
 
   &:hover {
     color: #ffffff;
-    mat-icon { transform: translateX(-3px); }
+
+    mat-icon {
+      transform: translateX(-3px);
+    }
   }
 }
 
 :host-context([dir="rtl"]) .back-home-btn {
-  mat-icon { transform: scaleX(-1); }
-  &:hover mat-icon { transform: scaleX(-1) translateX(3px); }
+  mat-icon {
+    transform: scaleX(-1);
+  }
+
+  &:hover mat-icon {
+    transform: scaleX(-1) translateX(3px);
+  }
 }
 
 .topbar-actions {
@@ -105,7 +111,11 @@
   transition: all 0.2s;
   backdrop-filter: blur(8px);
 
-  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.16);
@@ -130,7 +140,11 @@
   transition: all 0.2s;
   backdrop-filter: blur(8px);
 
-  mat-icon { font-size: 16px; width: 16px; height: 16px; }
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.16);
@@ -282,7 +296,10 @@
     border-color: rgba(99, 102, 241, 0.5);
     background: rgba(99, 102, 241, 0.12);
     color: rgba(255, 255, 255, 0.9);
-    .role-icon { transform: scale(1.15); }
+
+    .role-icon {
+      transform: scale(1.15);
+    }
   }
 
   &.active {
@@ -291,7 +308,10 @@
     color: #a5b4fc;
     font-weight: 600;
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2), 0 4px 12px rgba(99, 102, 241, 0.2);
-    .role-icon { transform: scale(1.1); }
+
+    .role-icon {
+      transform: scale(1.1);
+    }
   }
 }
 
@@ -307,7 +327,12 @@
   color: #fca5a5;
   font-size: 0.88rem;
 
-  mat-icon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; }
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
 }
 
 /* ---- Auth Form ---- */
@@ -343,7 +368,10 @@
   font-weight: 500;
   transition: color 0.2s;
 
-  &:hover { color: #c7d2fe; text-decoration: underline; }
+  &:hover {
+    color: #c7d2fe;
+    text-decoration: underline;
+  }
 }
 
 .field-input-wrap {
@@ -379,7 +407,9 @@
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 
-  &::placeholder { color: rgba(255, 255, 255, 0.3); }
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
 
   &:focus {
     outline: none;
@@ -417,9 +447,15 @@
   border-radius: 6px;
   transition: color 0.2s;
 
-  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
 
-  &:hover { color: rgba(255, 255, 255, 0.8); }
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
 }
 
 :host-context([dir="rtl"]) .toggle-password-btn {
@@ -454,22 +490,34 @@
   margin-top: 4px;
   letter-spacing: 0.3px;
 
-  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
   }
 
-  &:active:not(:disabled) { transform: translateY(0); }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
 
-  &:disabled { opacity: 0.55; cursor: not-allowed; }
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
 
   /* Forgot password button */
   &.forgot-submit {
     background: linear-gradient(135deg, #f59e0b, #ef4444);
     box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
-    &:hover:not(:disabled) { box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5); }
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5);
+    }
   }
 }
 
@@ -488,7 +536,11 @@
   }
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* ---- Demo Hint ---- */
 .demo-hint {
@@ -502,7 +554,13 @@
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.78rem;
 
-  mat-icon { font-size: 15px; width: 15px; height: 15px; flex-shrink: 0; color: #a5b4fc; }
+  mat-icon {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: #a5b4fc;
+  }
 }
 
 /* ---- Alt Link (Register / Sign In) ---- */
@@ -516,7 +574,11 @@
   gap: 6px;
   flex-wrap: wrap;
 
-  .back-icon { font-size: 16px; width: 16px; height: 16px; }
+  .back-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
 
   a {
     color: #a5b4fc;
@@ -524,7 +586,10 @@
     font-weight: 600;
     transition: color 0.2s;
 
-    &:hover { color: #c7d2fe; text-decoration: underline; }
+    &:hover {
+      color: #c7d2fe;
+      text-decoration: underline;
+    }
   }
 }
 
@@ -551,8 +616,8 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(245,158,11,0.4), rgba(239,68,68,0.4));
-  border: 1px solid rgba(245,158,11,0.3);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(239, 68, 68, 0.4));
+  border: 1px solid rgba(245, 158, 11, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -569,7 +634,10 @@
   margin-left: 13px;
 }
 
-:host-context([dir="rtl"]) .step-connector { margin-left: 0; margin-right: 13px; }
+:host-context([dir="rtl"]) .step-connector {
+  margin-left: 0;
+  margin-right: 13px;
+}
 
 /* ---- Success States ---- */
 .success-state {
@@ -585,16 +653,16 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(16,185,129,0.1));
-  border: 2px solid rgba(34,197,94,0.3);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.1));
+  border: 2px solid rgba(34, 197, 94, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   animation: popIn 0.5s ease;
 
   &.forgot-success-icon-wrap {
-    background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(239,68,68,0.1));
-    border-color: rgba(245,158,11,0.3);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.1));
+    border-color: rgba(245, 158, 11, 0.3);
   }
 }
 
@@ -610,9 +678,19 @@
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.5); opacity: 0; }
-  80% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .success-title {
@@ -649,7 +727,12 @@
   font-size: 0.9rem;
   font-weight: 500;
 
-  mat-icon { font-size: 18px; width: 18px; height: 18px; color: #fbbf24; }
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #fbbf24;
+  }
 }
 
 .back-to-login-btn {
@@ -667,7 +750,11 @@
   transition: all 0.2s;
   margin-top: 4px;
 
-  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.12);
@@ -682,8 +769,15 @@
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================================================
